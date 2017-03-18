@@ -9,6 +9,7 @@
 #include <QDebug>
 
 #define BUFLEN 1024
+#define DEFAULT_USERNAME "Anonymous"
 
 class Client
 {

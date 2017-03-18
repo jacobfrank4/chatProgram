@@ -38,6 +38,8 @@ public:
     QPushButton *connectButton;
     QLabel *userListLabel;
     QTextEdit *textEdit;
+    QLabel *usernameLabel;
+    QLineEdit *usernameLineEdit;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -46,35 +48,41 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(870, 405);
+        MainWindow->resize(870, 446);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         sendTextEdit = new QTextEdit(centralWidget);
         sendTextEdit->setObjectName(QStringLiteral("sendTextEdit"));
-        sendTextEdit->setGeometry(QRect(150, 310, 601, 31));
+        sendTextEdit->setGeometry(QRect(150, 350, 601, 31));
         sendButton = new QPushButton(centralWidget);
         sendButton->setObjectName(QStringLiteral("sendButton"));
-        sendButton->setGeometry(QRect(760, 310, 80, 30));
+        sendButton->setGeometry(QRect(760, 350, 80, 30));
         ipAddress = new QLineEdit(centralWidget);
         ipAddress->setObjectName(QStringLiteral("ipAddress"));
-        ipAddress->setGeometry(QRect(20, 230, 113, 25));
+        ipAddress->setGeometry(QRect(20, 270, 113, 25));
         portNumber = new QLineEdit(centralWidget);
         portNumber->setObjectName(QStringLiteral("portNumber"));
-        portNumber->setGeometry(QRect(20, 260, 113, 25));
+        portNumber->setGeometry(QRect(20, 300, 113, 25));
         chatTextEdit = new QTextEdit(centralWidget);
         chatTextEdit->setObjectName(QStringLiteral("chatTextEdit"));
-        chatTextEdit->setGeometry(QRect(150, 10, 701, 280));
+        chatTextEdit->setGeometry(QRect(150, 50, 701, 280));
         chatTextEdit->setReadOnly(true);
         connectButton = new QPushButton(centralWidget);
         connectButton->setObjectName(QStringLiteral("connectButton"));
-        connectButton->setGeometry(QRect(20, 290, 80, 25));
+        connectButton->setGeometry(QRect(20, 330, 80, 25));
         userListLabel = new QLabel(centralWidget);
         userListLabel->setObjectName(QStringLiteral("userListLabel"));
-        userListLabel->setGeometry(QRect(20, 10, 54, 17));
+        userListLabel->setGeometry(QRect(20, 50, 54, 17));
         textEdit = new QTextEdit(centralWidget);
         textEdit->setObjectName(QStringLiteral("textEdit"));
-        textEdit->setGeometry(QRect(20, 30, 111, 180));
+        textEdit->setGeometry(QRect(20, 70, 111, 180));
         textEdit->setReadOnly(true);
+        usernameLabel = new QLabel(centralWidget);
+        usernameLabel->setObjectName(QStringLiteral("usernameLabel"));
+        usernameLabel->setGeometry(QRect(20, 10, 71, 21));
+        usernameLineEdit = new QLineEdit(centralWidget);
+        usernameLineEdit->setObjectName(QStringLiteral("usernameLineEdit"));
+        usernameLineEdit->setGeometry(QRect(90, 10, 151, 21));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -100,6 +108,8 @@ public:
         portNumber->setText(QApplication::translate("MainWindow", "Port Number", Q_NULLPTR));
         connectButton->setText(QApplication::translate("MainWindow", "Connect", Q_NULLPTR));
         userListLabel->setText(QApplication::translate("MainWindow", "Users", Q_NULLPTR));
+        usernameLabel->setText(QApplication::translate("MainWindow", "Username:", Q_NULLPTR));
+        usernameLineEdit->setText(QApplication::translate("MainWindow", "Anonymous", Q_NULLPTR));
     } // retranslateUi
 
 };
