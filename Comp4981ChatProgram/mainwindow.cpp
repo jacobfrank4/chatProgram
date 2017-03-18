@@ -15,6 +15,25 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: on_connectButton_clicked
+--
+-- DATE: March 15, 2017
+--
+-- REVISIONS:
+--      JF: March 18, 2017: Added functionality to get the users name from a text field in the UI
+--
+-- DESIGNER:
+--
+-- PROGRAMMER:
+--
+-- INTERFACE: void on_connectButton_clicked()
+--
+-- RETURNS: void.
+--
+-- NOTES:
+--
+----------------------------------------------------------------------------------------------------------------------*/
 void MainWindow::on_connectButton_clicked()
 {
     if(client.isConnected())
@@ -22,12 +41,16 @@ void MainWindow::on_connectButton_clicked()
 
     QString ipAddr = ui->ipAddress->text();
     QString port = ui->portNumber->text();
+    QString username = ui->usernameLineEdit->text().trimmed();
+    if (username.isEmpty()) {
+        username = DEFAULT_USERNAME;
+    }
 
     if(ipAddr.length() < 1 || port.length() < 1)
         return;
 
     if(client.initSocket(ipAddr, port))
-        client.changeUserName("Terry");
+        client.changeUserName(username);
 }
 
 void MainWindow::on_sendButton_clicked()
@@ -47,4 +70,9 @@ void MainWindow::on_sendButton_clicked()
 
 void MainWindow::updateChatBox(QString message) {
     ui->chatTextEdit->append(message);
+}
+
+void MainWindow::on_usernameLineEdit_cursorPositionChanged(int arg1, int arg2)
+{
+
 }
