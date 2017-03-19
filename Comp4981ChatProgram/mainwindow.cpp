@@ -100,7 +100,7 @@ void MainWindow::receiveThread() {
 --
 -- PROGRAMMER:
 --
--- INTERFACE: on_sendButton_clicked()
+-- INTERFACE: void on_sendButton_clicked()
 --
 -- RETURNS: void.
 --
@@ -124,4 +124,35 @@ void MainWindow::on_sendButton_clicked()
 
 void MainWindow::updateChatBox(QString message) {
     ui->chatTextEdit->append(message);
+}
+
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: on_pushButton_clicked
+--
+-- DATE: March 18, 2017
+--
+-- DESIGNER: Jacob Frank
+--
+-- PROGRAMMER: Jacob Frank
+--
+-- INTERFACE: void on_pushButton_clicked()
+--
+-- RETURNS: void
+--
+-- NOTES:
+-- Called when user clicks the export chat button.
+-- Creates a text file with a name specifed by the user via a dialog window
+-- After user specifies file name and save location, function saves the contents of the chat window to the file
+----------------------------------------------------------------------------------------------------------------------*/
+void MainWindow::on_exportChatButton_clicked()
+{
+    QString filename = QFileDialog::getSaveFileName(this, "Save File", "/home/chat.txt", "Text Files (*.txt)");
+    QFile handle(filename);
+
+    if (handle.open(QIODevice::ReadWrite)) {
+        QTextStream out(&handle);
+
+        out << ui->chatTextEdit->toPlainText(); //writes contents of chat to specified file
+    }
+    handle.close();
 }

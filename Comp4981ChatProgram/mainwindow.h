@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFileDialog>
 #include "client.h"
 
 namespace Ui {
@@ -26,6 +27,10 @@ private slots:
     void on_sendButton_clicked();
 
     void on_usernameLineEdit_cursorPositionChanged(int arg1, int arg2);
+
+    void on_pushButton_clicked();
+
+    void on_exportChatButton_clicked();
 
 private:
     Ui::MainWindow *ui;

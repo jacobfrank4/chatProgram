@@ -40,6 +40,7 @@ public:
     QTextEdit *textEdit;
     QLabel *usernameLabel;
     QLineEdit *usernameLineEdit;
+    QPushButton *exportChatButton;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -83,6 +84,9 @@ public:
         usernameLineEdit = new QLineEdit(centralWidget);
         usernameLineEdit->setObjectName(QStringLiteral("usernameLineEdit"));
         usernameLineEdit->setGeometry(QRect(90, 10, 151, 21));
+        exportChatButton = new QPushButton(centralWidget);
+        exportChatButton->setObjectName(QStringLiteral("exportChatButton"));
+        exportChatButton->setGeometry(QRect(730, 10, 121, 25));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -110,6 +114,7 @@ public:
         userListLabel->setText(QApplication::translate("MainWindow", "Users", Q_NULLPTR));
         usernameLabel->setText(QApplication::translate("MainWindow", "Username:", Q_NULLPTR));
         usernameLineEdit->setText(QString());
+        exportChatButton->setText(QApplication::translate("MainWindow", "Save Chat", Q_NULLPTR));
     } // retranslateUi
 
 };
