@@ -23,6 +23,7 @@ MainWindow::~MainWindow()
 --
 -- REVISIONS:
 --      JF: March 18, 2017: Added functionality to get the users name from a text field in the UI
+--      JF: March 18, 2017: Added connection response to inform user that connection to server was established
 --
 -- DESIGNER:
 --
@@ -54,6 +55,7 @@ void MainWindow::on_connectButton_clicked()
     if(client.initSocket(ipAddr, port)) {
         client.changeUserName(username);
         ui->usernameLineEdit->setReadOnly(true); //Stops user from changing their name after connecting to the server
+        updateChatBox("------------- Connected -------------");
         std::thread receivingThread(&MainWindow::receiveThread, this);
         receivingThread.detach();
     }
