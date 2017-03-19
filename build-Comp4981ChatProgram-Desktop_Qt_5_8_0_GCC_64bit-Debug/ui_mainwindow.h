@@ -109,7 +109,7 @@ public:
         connectButton->setText(QApplication::translate("MainWindow", "Connect", Q_NULLPTR));
         userListLabel->setText(QApplication::translate("MainWindow", "Users", Q_NULLPTR));
         usernameLabel->setText(QApplication::translate("MainWindow", "Username:", Q_NULLPTR));
-        usernameLineEdit->setText(QApplication::translate("MainWindow", "Anonymous", Q_NULLPTR));
+        usernameLineEdit->setText(QString());
     } // retranslateUi
 
 };

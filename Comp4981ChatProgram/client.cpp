@@ -45,7 +45,9 @@ bool Client::initSocket(QString _ipAddr, QString _port){
      printf("Connected:    Server Name: %s\n", hp->h_name);
      boolConnected = true;
 
+     return boolConnected;
 }
+
 bool Client::sendMessage(QString message) {
     send(sock, message.toStdString().c_str(), BUFLEN, 0);
 }
@@ -56,18 +58,33 @@ bool Client::changeUserName(QString _name) {
     sendMessage(message);
 }
 
-bool Client::recvMessage(){
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: recvMessage(char* buffer)
+--
+-- DATE: March 18, 2017
+--
+-- DESIGNER: Jacob Frank
+--
+-- PROGRAMMER: Jacob Frank
+--
+-- INTERFACE: bool recvMessage(char* buffer)
+--                      char* buffer: buffer to store the bytes read from the socket
+--
+-- RETURNS: true on successfull read
+--
+-- NOTES:
+-- When function is called, bytes are read from the socket equal to the defined BUFLEN size and stored into
+-- the buffer passed into the function.
+----------------------------------------------------------------------------------------------------------------------*/
+bool Client::recvMessage(char* buffer){
     int n = 0;
     int bytes_to_read = BUFLEN;
-    char *buf;
-    buf = (char *)malloc(sizeof(char) * BUFLEN);
-    while ((n = recv(sock, buf, bytes_to_read, 0)) < BUFLEN)
+    while ((n = recv(sock, buffer, bytes_to_read, 0)) < BUFLEN)
     {
-        buf += n;
+        buffer += n;
         bytes_to_read -= n;
     }
-    free(buf);
-
+    return true;
 }
 
 QString Client::getUserName() {

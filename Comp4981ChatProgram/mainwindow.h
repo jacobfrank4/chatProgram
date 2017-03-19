@@ -18,6 +18,8 @@ public:
 
     void updateChatBox(QString message);
 
+    void receiveThread();
+
 private slots:
     void on_connectButton_clicked();
 

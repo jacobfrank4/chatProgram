@@ -81,7 +81,6 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->on_connectButton_clicked(); break;
         case 1: _t->on_sendButton_clicked(); break;
-        case 2: _t->on_usernameLineEdit_cursorPositionChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         default: ;
         }
     }
