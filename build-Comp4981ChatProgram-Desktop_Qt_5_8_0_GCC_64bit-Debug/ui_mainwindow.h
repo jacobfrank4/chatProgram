@@ -50,43 +50,60 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(870, 446);
+        MainWindow->setStyleSheet(QStringLiteral("background-color: rgb(45, 45, 48);"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         sendTextEdit = new QTextEdit(centralWidget);
         sendTextEdit->setObjectName(QStringLiteral("sendTextEdit"));
         sendTextEdit->setGeometry(QRect(150, 350, 601, 31));
+        sendTextEdit->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
         sendButton = new QPushButton(centralWidget);
         sendButton->setObjectName(QStringLiteral("sendButton"));
         sendButton->setGeometry(QRect(760, 350, 80, 30));
+        sendButton->setStyleSheet(QLatin1String("background-color: rgb(38, 22, 77);\n"
+"color: rgb(255, 255, 255);"));
         ipAddress = new QLineEdit(centralWidget);
         ipAddress->setObjectName(QStringLiteral("ipAddress"));
         ipAddress->setGeometry(QRect(20, 270, 113, 25));
+        ipAddress->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
         portNumber = new QLineEdit(centralWidget);
         portNumber->setObjectName(QStringLiteral("portNumber"));
         portNumber->setGeometry(QRect(20, 300, 113, 25));
+        portNumber->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
         chatTextEdit = new QTextEdit(centralWidget);
         chatTextEdit->setObjectName(QStringLiteral("chatTextEdit"));
         chatTextEdit->setGeometry(QRect(150, 50, 701, 280));
+        chatTextEdit->setStyleSheet(QLatin1String("background-color: rgb(30, 30, 30);\n"
+"color: rgb(255, 255, 255);"));
         chatTextEdit->setReadOnly(true);
         connectButton = new QPushButton(centralWidget);
         connectButton->setObjectName(QStringLiteral("connectButton"));
         connectButton->setGeometry(QRect(20, 330, 80, 25));
+        connectButton->setStyleSheet(QLatin1String("background-color: rgb(38, 22, 77);\n"
+"color: rgb(255, 255, 255);"));
         userListLabel = new QLabel(centralWidget);
         userListLabel->setObjectName(QStringLiteral("userListLabel"));
         userListLabel->setGeometry(QRect(20, 50, 54, 17));
+        userListLabel->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         textEdit = new QTextEdit(centralWidget);
         textEdit->setObjectName(QStringLiteral("textEdit"));
         textEdit->setGeometry(QRect(20, 70, 111, 180));
+        textEdit->setStyleSheet(QLatin1String("color: rgb(255, 255, 255);\n"
+"background-color: rgb(30, 30, 30);"));
         textEdit->setReadOnly(true);
         usernameLabel = new QLabel(centralWidget);
         usernameLabel->setObjectName(QStringLiteral("usernameLabel"));
         usernameLabel->setGeometry(QRect(20, 10, 71, 21));
+        usernameLabel->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         usernameLineEdit = new QLineEdit(centralWidget);
         usernameLineEdit->setObjectName(QStringLiteral("usernameLineEdit"));
         usernameLineEdit->setGeometry(QRect(90, 10, 151, 21));
+        usernameLineEdit->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
         exportChatButton = new QPushButton(centralWidget);
         exportChatButton->setObjectName(QStringLiteral("exportChatButton"));
         exportChatButton->setGeometry(QRect(730, 10, 121, 25));
+        exportChatButton->setStyleSheet(QLatin1String("background-color: rgb(38, 22, 77);\n"
+"color: rgb(255, 255, 255);"));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
