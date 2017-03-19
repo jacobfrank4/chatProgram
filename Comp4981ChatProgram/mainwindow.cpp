@@ -141,7 +141,8 @@ void MainWindow::updateChatBox(QString message) {
 --
 -- NOTES:
 -- Called when user clicks the export chat button.
---
+-- Creates a text file with a name specifed by the user via a dialog window
+-- After user specifies file name and save location, function saves the contents of the chat window to the file
 ----------------------------------------------------------------------------------------------------------------------*/
 void MainWindow::on_exportChatButton_clicked()
 {
