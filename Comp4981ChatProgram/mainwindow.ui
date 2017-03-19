@@ -138,7 +138,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Anonymous</string>
+     <string/>
     </property>
    </widget>
   </widget>
