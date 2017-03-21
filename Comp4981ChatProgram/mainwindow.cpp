@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->usernameLineEdit->setText(DEFAULT_USERNAME);
     ui->ipAddress->setText("96.49.228.48");
+    //ui->ipAddress->setText("192.168.0.200");
     ui->portNumber->setText("7000");
 }
 
@@ -58,6 +59,7 @@ void MainWindow::on_connectButton_clicked()
         updateChatBox("------------- Connected -------------");
         std::thread receivingThread(&MainWindow::receiveThread, this);
         receivingThread.detach();
+        connect(this, SIGNAL(userLeft(QString)), this, SLOT(removeUser(QString)));
     }
 }
 
@@ -84,7 +86,7 @@ void MainWindow::receiveThread() {
     buf = (char *)malloc(sizeof(char) * BUFLEN);
     while (1) {
         client.recvMessage(buf);
-        updateChatBox(buf);
+        decodeMessage(buf);
     }
     free(buf);
 }
@@ -118,7 +120,7 @@ void MainWindow::on_sendButton_clicked()
     if(message.length() < 1)
         return;
 
-    client.sendMessage("1[" + client.getUserName() + "] : " + message);
+    client.sendMessage("0[" + client.getUserName() + "] : " + message);
     updateChatBox("[me] : " + message);
     ui->sendTextEdit->setText("");
 
@@ -126,6 +128,56 @@ void MainWindow::on_sendButton_clicked()
 
 void MainWindow::updateChatBox(QString message) {
     ui->chatTextEdit->append(message);
+}
+
+void MainWindow::decodeMessage(QString message) {
+    qDebug() << "decodeMessage";
+
+    if(!message.at(0).isNumber())
+        return;
+    switch(message.at(0).digitValue()){
+    case 1:
+        addUser(message.mid(1));
+        break;
+    case 2:
+        updateUserList(message.mid(1));
+        break;
+    case 3:
+        emit userLeft(message.mid(1));
+        break;
+    default:
+        updateChatBox(message.mid(1));
+        break;
+    }
+}
+
+void MainWindow::addUser(QString username) {
+    ui->userList->append(username);
+    ui->chatTextEdit->append("------------- [" + username + "] joined -------------");
+}
+
+void MainWindow::removeUser(QString username) {
+    QStringList list = ui->userList->toPlainText().split("\n");
+    qDebug()<<username;
+
+    foreach (QString name, list) {
+        if(name.compare(username) == 0) {
+            list.removeOne(name);
+            break;
+        }
+    }
+    qDebug()<<list;
+    ui->userList->setPlainText(list.join("\n"));
+
+    ui->chatTextEdit->append("------------- [" + username + "] left -------------");
+}
+
+void MainWindow::updateUserList(QString userlist) {
+    QStringList list = userlist.split(":");
+    foreach (QString name, list) {
+        if(name.length()>0)
+            ui->userList->append(name);
+    }
 }
 
 /*------------------------------------------------------------------------------------------------------------------

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QTextBlock>
 #include "client.h"
 
 namespace Ui {
@@ -18,7 +19,9 @@ public:
     ~MainWindow();
 
     void updateChatBox(QString message);
-
+    void decodeMessage(QString message);
+    void addUser(QString username);
+    void updateUserList(QString userlist);
     void receiveThread();
 
 private slots:
@@ -26,11 +29,12 @@ private slots:
 
     void on_sendButton_clicked();
 
-    void on_usernameLineEdit_cursorPositionChanged(int arg1, int arg2);
-
-    void on_pushButton_clicked();
-
     void on_exportChatButton_clicked();
+
+    void removeUser(QString username);
+
+signals:
+    void userLeft(QString username);
 
 private:
     Ui::MainWindow *ui;

@@ -37,7 +37,7 @@ public:
     QTextEdit *chatTextEdit;
     QPushButton *connectButton;
     QLabel *userListLabel;
-    QTextEdit *textEdit;
+    QTextEdit *userList;
     QLabel *usernameLabel;
     QLineEdit *usernameLineEdit;
     QPushButton *exportChatButton;
@@ -85,12 +85,12 @@ public:
         userListLabel->setObjectName(QStringLiteral("userListLabel"));
         userListLabel->setGeometry(QRect(20, 20, 54, 21));
         userListLabel->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        textEdit = new QTextEdit(centralWidget);
-        textEdit->setObjectName(QStringLiteral("textEdit"));
-        textEdit->setGeometry(QRect(20, 49, 111, 201));
-        textEdit->setStyleSheet(QLatin1String("color: rgb(255, 255, 255);\n"
+        userList = new QTextEdit(centralWidget);
+        userList->setObjectName(QStringLiteral("userList"));
+        userList->setGeometry(QRect(20, 49, 111, 201));
+        userList->setStyleSheet(QLatin1String("color: rgb(255, 255, 255);\n"
 "background-color: rgb(30, 30, 30);"));
-        textEdit->setReadOnly(true);
+        userList->setReadOnly(true);
         usernameLabel = new QLabel(centralWidget);
         usernameLabel->setObjectName(QStringLiteral("usernameLabel"));
         usernameLabel->setGeometry(QRect(150, 20, 61, 21));
