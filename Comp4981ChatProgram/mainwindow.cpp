@@ -7,8 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->usernameLineEdit->setText(DEFAULT_USERNAME);
-    //ui->ipAddress->setText("96.49.228.48");
-    ui->ipAddress->setText("192.168.0.200");
+    ui->ipAddress->setText("96.49.228.48");
+    //ui->ipAddress->setText("192.168.0.200");
     ui->portNumber->setText("7000");
 }
 
