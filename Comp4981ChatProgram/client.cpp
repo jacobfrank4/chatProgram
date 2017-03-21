@@ -54,7 +54,7 @@ bool Client::sendMessage(QString message) {
 
 bool Client::changeUserName(QString _name) {
     username = _name;
-    QString message = '0' + username;
+    QString message = '1' + username;
     sendMessage(message);
 }
 

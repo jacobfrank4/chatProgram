@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[9];
-    char stringdata0[161];
+    QByteArrayData data[8];
+    char stringdata0[116];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,21 +32,18 @@ struct qt_meta_stringdata_MainWindow_t {
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 24), // "on_connectButton_clicked"
-QT_MOC_LITERAL(2, 36, 0), // ""
-QT_MOC_LITERAL(3, 37, 21), // "on_sendButton_clicked"
-QT_MOC_LITERAL(4, 59, 41), // "on_usernameLineEdit_cursorPos..."
-QT_MOC_LITERAL(5, 101, 4), // "arg1"
-QT_MOC_LITERAL(6, 106, 4), // "arg2"
-QT_MOC_LITERAL(7, 111, 21), // "on_pushButton_clicked"
-QT_MOC_LITERAL(8, 133, 27) // "on_exportChatButton_clicked"
+QT_MOC_LITERAL(1, 11, 8), // "userLeft"
+QT_MOC_LITERAL(2, 20, 0), // ""
+QT_MOC_LITERAL(3, 21, 8), // "username"
+QT_MOC_LITERAL(4, 30, 24), // "on_connectButton_clicked"
+QT_MOC_LITERAL(5, 55, 21), // "on_sendButton_clicked"
+QT_MOC_LITERAL(6, 77, 27), // "on_exportChatButton_clicked"
+QT_MOC_LITERAL(7, 105, 10) // "removeUser"
 
     },
-    "MainWindow\0on_connectButton_clicked\0"
-    "\0on_sendButton_clicked\0"
-    "on_usernameLineEdit_cursorPositionChanged\0"
-    "arg1\0arg2\0on_pushButton_clicked\0"
-    "on_exportChatButton_clicked"
+    "MainWindow\0userLeft\0\0username\0"
+    "on_connectButton_clicked\0on_sendButton_clicked\0"
+    "on_exportChatButton_clicked\0removeUser"
 };
 #undef QT_MOC_LITERAL
 
@@ -61,21 +58,25 @@ static const uint qt_meta_data_MainWindow[] = {
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags
+       1,    1,   39,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   39,    2, 0x08 /* Private */,
-       3,    0,   40,    2, 0x08 /* Private */,
-       4,    2,   41,    2, 0x08 /* Private */,
-       7,    0,   46,    2, 0x08 /* Private */,
-       8,    0,   47,    2, 0x08 /* Private */,
+       4,    0,   42,    2, 0x08 /* Private */,
+       5,    0,   43,    2, 0x08 /* Private */,
+       6,    0,   44,    2, 0x08 /* Private */,
+       7,    1,   45,    2, 0x08 /* Private */,
+
+ // signals: parameters
+    QMetaType::Void, QMetaType::QString,    3,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    5,    6,
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    3,
 
        0        // eod
 };
@@ -86,10 +87,22 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         MainWindow *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_connectButton_clicked(); break;
-        case 1: _t->on_sendButton_clicked(); break;
-        case 4: _t->on_exportChatButton_clicked(); break;
+        case 0: _t->userLeft((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 1: _t->on_connectButton_clicked(); break;
+        case 2: _t->on_sendButton_clicked(); break;
+        case 3: _t->on_exportChatButton_clicked(); break;
+        case 4: _t->removeUser((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        void **func = reinterpret_cast<void **>(_a[1]);
+        {
+            typedef void (MainWindow::*_t)(QString );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&MainWindow::userLeft)) {
+                *result = 0;
+                return;
+            }
         }
     }
 }
@@ -128,6 +141,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 5;
     }
     return _id;
+}
+
+// SIGNAL 0
+void MainWindow::userLeft(QString _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

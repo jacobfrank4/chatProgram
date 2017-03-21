@@ -129,7 +129,7 @@ color: rgb(255, 255, 255);</string>
      <string>Users</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="userList">
     <property name="geometry">
      <rect>
       <x>20</x>
