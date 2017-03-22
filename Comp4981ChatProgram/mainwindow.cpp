@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->ipAddress->setText("96.49.228.48");
     //ui->ipAddress->setText("192.168.0.200");
     ui->portNumber->setText("7000");
+    ui->sendTextEdit->installEventFilter(this);  //Allows for the monitoring of the return key for sending messages
 }
 
 MainWindow::~MainWindow()
@@ -62,6 +63,42 @@ void MainWindow::on_connectButton_clicked()
         connect(this, SIGNAL(userLeft(QString)), this, SLOT(removeUser(QString)));
     }
 }
+
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: eventFilter
+--
+-- DATE: March 21, 2017
+--
+-- DESIGNER: Jacob Frank
+--
+-- PROGRAMMER: Jacob Frank
+--
+-- INTERFACE: bool eventFilter(QObject *object, QEvent *event)
+--                      QObject *object:
+--                      QEvent *event:
+--
+-- RETURNS: Returns true on return key pressed, otherwise false
+--
+-- NOTES:
+-- Function filters events that occur in the Text Edit box for sending messages to the other clients.
+-- When a return key is detected, the function checks to see if the shift key is also depressed.
+-- If the shift key is depressed along with the enter key, a new line character is inserted as normal.
+-- If only the enter key is pressed, then the on_sendbutton_clicked() method is called which sends the message to
+-- the server for transmission to all the clients.
+----------------------------------------------------------------------------------------------------------------------*/
+bool MainWindow::eventFilter(QObject *object, QEvent *event) {
+    if (object == ui->sendTextEdit && event->type() == QEvent::KeyPress) {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+        if (keyEvent->key() == Qt::Key_Return && !(keyEvent->modifiers() & Qt::ShiftModifier)) {
+            on_sendButton_clicked();
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
 
 /*------------------------------------------------------------------------------------------------------------------
 -- FUNCTION: receiveThread
@@ -126,8 +163,29 @@ void MainWindow::on_sendButton_clicked()
 
 }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: on_sendButton_clicked
+--
+-- DATE: March 18, 2017
+--
+-- REVISIONS:
+--      JF: March 21, 2017: Added functionality so scrollbar focus is always at bottom
+--
+-- DESIGNER:
+--
+-- PROGRAMMER:
+--
+-- INTERFACE: void updateChatBox(QString message)
+--                  QString message: Text data to be written to the chat area of the GUI
+--
+-- RETURNS: void.
+--
+-- NOTES:
+--
+----------------------------------------------------------------------------------------------------------------------*/
 void MainWindow::updateChatBox(QString message) {
     ui->chatTextEdit->append(message);
+    ui->chatTextEdit->verticalScrollBar()->setValue(ui->chatTextEdit->verticalScrollBar()->maximum());
 }
 
 void MainWindow::decodeMessage(QString message) {

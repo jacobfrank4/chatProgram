@@ -93,11 +93,11 @@ public:
         userList->setReadOnly(true);
         usernameLabel = new QLabel(centralWidget);
         usernameLabel->setObjectName(QStringLiteral("usernameLabel"));
-        usernameLabel->setGeometry(QRect(150, 20, 61, 21));
+        usernameLabel->setGeometry(QRect(150, 20, 71, 21));
         usernameLabel->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         usernameLineEdit = new QLineEdit(centralWidget);
         usernameLineEdit->setObjectName(QStringLiteral("usernameLineEdit"));
-        usernameLineEdit->setGeometry(QRect(220, 20, 151, 21));
+        usernameLineEdit->setGeometry(QRect(230, 20, 151, 21));
         usernameLineEdit->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
         exportChatButton = new QPushButton(centralWidget);
         exportChatButton->setObjectName(QStringLiteral("exportChatButton"));

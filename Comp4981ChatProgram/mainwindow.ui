@@ -151,7 +151,7 @@ background-color: rgb(30, 30, 30);</string>
      <rect>
       <x>150</x>
       <y>20</y>
-      <width>61</width>
+      <width>71</width>
       <height>21</height>
      </rect>
     </property>
@@ -165,7 +165,7 @@ background-color: rgb(30, 30, 30);</string>
    <widget class="QLineEdit" name="usernameLineEdit">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>230</x>
       <y>20</y>
       <width>151</width>
       <height>21</height>
