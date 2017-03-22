@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QTextBlock>
+#include <QScrollBar>
 #include "client.h"
 
 namespace Ui {
@@ -23,6 +24,7 @@ public:
     void addUser(QString username);
     void updateUserList(QString userlist);
     void receiveThread();
+    bool eventFilter(QObject *object, QEvent *event);
 
 private slots:
     void on_connectButton_clicked();
