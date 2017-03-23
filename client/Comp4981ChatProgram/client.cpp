@@ -1,10 +1,43 @@
 #include "client.h"
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: Client
+--
+-- DATE: March 18, 2017
+--
+-- DESIGNER: Terry Kang
+--
+-- PROGRAMMER: Terry Kang
+--
+-- INTERFACE: Client::Client()
+--
+-- NOTES:
+-- Constructor of Client Class.
+----------------------------------------------------------------------------------------------------------------------*/
 Client::Client()
 {
     boolConnected = false;
 }
 
+
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: initSocket
+--
+-- DATE: March 18, 2017
+--
+-- DESIGNER: Terry Kang
+--
+-- PROGRAMMER: Terry Kang
+--
+-- INTERFACE: bool Client::initSocket(QString _ipAddr, QString _port)
+--                      QString _ipAddr: the string data of ip address for the server
+--                      QString _port: the string data of port number for the server
+--
+-- RETURNS: true on successfull creating socket
+--
+-- NOTES:
+-- Creates a TCP socket with the passed ip address and port number to establish TCP connection to server.
+----------------------------------------------------------------------------------------------------------------------*/
 bool Client::initSocket(QString _ipAddr, QString _port){
      int port;
      struct hostent *hp;
@@ -48,10 +81,47 @@ bool Client::initSocket(QString _ipAddr, QString _port){
      return boolConnected;
 }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: sendMessage
+--
+-- DATE: March 18, 2017
+--
+-- DESIGNER: Terry Kang
+--
+-- PROGRAMMER: Terry Kang
+--
+-- INTERFACE: bool Client::sendMessage(QString message)
+--                      QString message : the string data to be sent to server.
+--
+-- RETURNS: true on successfull sending message
+--
+-- NOTES:
+-- A wrapper function to send data to server via the socket.
+----------------------------------------------------------------------------------------------------------------------*/
 bool Client::sendMessage(QString message) {
-    send(sock, message.toStdString().c_str(), BUFLEN, 0);
+    if(send(sock, message.toStdString().c_str(), BUFLEN, 0)<0)
+        return false;
+    return true;
 }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: changeUserName
+--
+-- DATE: March 18, 2017
+--
+-- DESIGNER: Terry Kang
+--
+-- PROGRAMMER: Terry Kang
+--
+-- INTERFACE: bool Client::changeUserName(QString _name)
+--                      QString _name: a string data of username to be sent to the server
+--
+-- RETURNS: true on successfull creating socket
+--
+-- NOTES:
+-- Called when the tcp connection to the server is established. Sends the passed user name to the server
+-- to inform and update the other user's user list
+----------------------------------------------------------------------------------------------------------------------*/
 bool Client::changeUserName(QString _name) {
     username = _name;
     QString message = '1' + username;
@@ -87,10 +157,42 @@ bool Client::recvMessage(char* buffer){
     return true;
 }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: getUserName
+--
+-- DATE: March 18, 2017
+--
+-- DESIGNER: Terry Kang
+--
+-- PROGRAMMER: Terry Kang
+--
+-- INTERFACE: QString Client::getUserName()
+--
+-- RETURNS: the string data of username
+--
+-- NOTES:
+-- Returns the username
+----------------------------------------------------------------------------------------------------------------------*/
 QString Client::getUserName() {
     return username;
 }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: isConnected
+--
+-- DATE: March 18, 2017
+--
+-- DESIGNER: Terry Kang
+--
+-- PROGRAMMER: Terry Kang
+--
+-- INTERFACE: bool Client::isConnected()
+--
+-- RETURNS: true if connected to the server
+--
+-- NOTES:
+-- Return true if connected to the server or false if not connected
+----------------------------------------------------------------------------------------------------------------------*/
 bool Client::isConnected(){
     return boolConnected;
 }

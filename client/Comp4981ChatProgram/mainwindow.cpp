@@ -1,6 +1,21 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: MainWindow
+--
+-- DATE: March 15, 2017
+--
+-- DESIGNER: Jocob Frank
+--
+-- PROGRAMMER: Jocob Frank
+--
+-- INTERFACE: MainWindow::MainWindow(QWidget *parent)
+--
+-- NOTES:
+--  Constructor of QT windows. Initialize QT windows
+----------------------------------------------------------------------------------------------------------------------*/
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -13,6 +28,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->sendTextEdit->installEventFilter(this);  //Allows for the monitoring of the return key for sending messages
 }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: ~MainWindow
+--
+-- DATE: March 15, 2017
+--
+-- DESIGNER: Jocob Frank
+--
+-- PROGRAMMER: Jocob Frank
+--
+-- INTERFACE: MainWindow::~MainWindow()
+--
+-- NOTES:
+--  Deconstructor of QT windows. Deletes the pointer of ui.
+----------------------------------------------------------------------------------------------------------------------*/
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -26,17 +55,20 @@ MainWindow::~MainWindow()
 -- REVISIONS:
 --      JF: March 18, 2017: Added functionality to get the users name from a text field in the UI
 --      JF: March 18, 2017: Added connection response to inform user that connection to server was established
+--      TK: March 17, 2017: Added the connection to server with the ip and port from the text field
 --
--- DESIGNER:
+-- DESIGNER: Terry Kang, Jocob Frank
 --
--- PROGRAMMER:
+-- PROGRAMMER: Terry Kang, Jocob Frank
 --
 -- INTERFACE: void on_connectButton_clicked()
 --
 -- RETURNS: void.
 --
 -- NOTES:
---
+--  Called When user clicks the connect button. Gets IP, port and username from the text fields
+--  , initializes the socket with the ip and port and sends the username to the server.
+-- Then, creates a thread for receving message from the server.
 ----------------------------------------------------------------------------------------------------------------------*/
 void MainWindow::on_connectButton_clicked()
 {
@@ -105,9 +137,9 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
 --
 -- DATE: March 18, 2017
 --
--- DESIGNER: Jacob Frank
+-- DESIGNER: Terry Kang, Jocob Frank
 --
--- PROGRAMMER: Jacob Frank
+-- PROGRAMMER: Terry Kang, Jocob Frank
 --
 -- INTERFACE: void receiveThread()
 --
@@ -136,17 +168,19 @@ void MainWindow::receiveThread() {
 -- REVISIONS:
 --      JF: March 18, 2017:Removed new line character added to end of
 --          message to prevent vertical gaps between messages
+--      TK: march 18, 2017:Added a feature to read a message from the text field and send it to server
 --
--- DESIGNER:
+-- DESIGNER: Terry Kang, Jocob Frank
 --
--- PROGRAMMER:
+-- PROGRAMMER: Terry Kang, Jocob Frank
 --
 -- INTERFACE: void on_sendButton_clicked()
 --
 -- RETURNS: void.
 --
 -- NOTES:
---
+--  Called when user clicks send button or press enter. Reads a message from the text field and sends it to server
+-- after adding '0' and user's name to the front of the message.
 ----------------------------------------------------------------------------------------------------------------------*/
 void MainWindow::on_sendButton_clicked()
 {
@@ -164,23 +198,25 @@ void MainWindow::on_sendButton_clicked()
 }
 
 /*------------------------------------------------------------------------------------------------------------------
--- FUNCTION: on_sendButton_clicked
+-- FUNCTION: updateChatBox
 --
 -- DATE: March 18, 2017
 --
 -- REVISIONS:
 --      JF: March 21, 2017: Added functionality so scrollbar focus is always at bottom
 --
--- DESIGNER:
+-- DESIGNER: Terry Kang, Jocob Frank
 --
--- PROGRAMMER:
+-- PROGRAMMER: Terry Kang, Jocob Frank
 --
--- INTERFACE: void updateChatBox(QString message)
+-- INTERFACE: void MainWindow::updateChatBox(QString message)
 --                  QString message: Text data to be written to the chat area of the GUI
 --
 -- RETURNS: void.
 --
 -- NOTES:
+--  Called when a message is received from the server and after decoding the message.
+--  Appends the message to the chat area of the GUI.
 --
 ----------------------------------------------------------------------------------------------------------------------*/
 void MainWindow::updateChatBox(QString message) {
@@ -188,32 +224,90 @@ void MainWindow::updateChatBox(QString message) {
     ui->chatTextEdit->verticalScrollBar()->setValue(ui->chatTextEdit->verticalScrollBar()->maximum());
 }
 
+
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: decodeMessage
+--
+-- DATE: March 18, 2017
+--
+--
+-- DESIGNER: Terry Kang
+--
+-- PROGRAMMER: Terry Kang
+--
+-- INTERFACE: void MainWindow::decodeMessage(QString message)
+--                  QString message: Text data recevied from the server
+--
+-- RETURNS: void.
+--
+-- NOTES:
+--  Called when received a message from the server.
+--  Reads the first character of the received message and handle the message by the code.
+----------------------------------------------------------------------------------------------------------------------*/
 void MainWindow::decodeMessage(QString message) {
     qDebug() << "decodeMessage";
 
     if(!message.at(0).isNumber())
         return;
     switch(message.at(0).digitValue()){
-    case 1:
+    case 1: // User joined
         addUser(message.mid(1));
         break;
-    case 2:
+    case 2: // User list
         updateUserList(message.mid(1));
         break;
-    case 3:
+    case 3: // User left
         emit userLeft(message.mid(1));
         break;
-    default:
+    default: // chat message
         updateChatBox(message.mid(1));
         break;
     }
 }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: addUser
+--
+-- DATE: March 18, 2017
+--
+--
+-- DESIGNER: Terry Kang
+--
+-- PROGRAMMER: Terry Kang
+--
+-- INTERFACE: void MainWindow::decodeMessage(QString username)
+--                  QString username: new user's name received from the server
+--
+-- RETURNS: void.
+--
+-- NOTES:
+--  Called when new user is joined and the new user's name is received.
+--  Appends the user's name to the user list of the GUI
+----------------------------------------------------------------------------------------------------------------------*/
 void MainWindow::addUser(QString username) {
     ui->userList->append(username);
     ui->chatTextEdit->append("------------- [" + username + "] joined -------------");
 }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: removeUser
+--
+-- DATE: March 18, 2017
+--
+--
+-- DESIGNER: Terry Kang
+--
+-- PROGRAMMER: Terry Kang
+--
+-- INTERFACE: void MainWindow::removeUser(QString username)
+--                  QString username: left user's name received from the server
+--
+-- RETURNS: void.
+--
+-- NOTES:
+--  Called when a user is left and the user's name is received.
+--  Remove the user's name from the user list of the GUI
+----------------------------------------------------------------------------------------------------------------------*/
 void MainWindow::removeUser(QString username) {
     QStringList list = ui->userList->toPlainText().split("\n");
     qDebug()<<username;
@@ -230,6 +324,26 @@ void MainWindow::removeUser(QString username) {
     ui->chatTextEdit->append("------------- [" + username + "] left -------------");
 }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: updateUserList
+--
+-- DATE: March 18, 2017
+--
+--
+-- DESIGNER: Terry Kang
+--
+-- PROGRAMMER: Terry Kang
+--
+-- INTERFACE: void MainWindow::updateUserList(QString userlist)
+--                  QString username: Text Data for the list of connected users
+--
+-- RETURNS: void.
+--
+-- NOTES:
+--  Called when initially connected to the server and received the list of connected users.
+--  Split the received textdata by ':' and save it to StringList.
+--  Then, appends the strings of the array to the user list of the GUI
+----------------------------------------------------------------------------------------------------------------------*/
 void MainWindow::updateUserList(QString userlist) {
     QStringList list = userlist.split(":");
     foreach (QString name, list) {
