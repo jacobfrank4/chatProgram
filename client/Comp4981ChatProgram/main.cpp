@@ -5,9 +5,9 @@
 --
 -- DATE: March 15, 2017
 --
--- DESIGNER: Terry Kang, Jocob Frank
+-- DESIGNER: Terry Kang, Jacob Frank
 --
--- PROGRAMMER: Terry Kang, Jocob Frank
+-- PROGRAMMER: Terry Kang, Jacob Frank
 --
 -- NOTES:
 -- This program is a client program for online chat via TCP connection on QT.
