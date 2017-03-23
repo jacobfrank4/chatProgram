@@ -14,7 +14,9 @@
 --
 -- PROGRAMMER: Terry Kang
 --
--- NOTES: Main entry of this program
+-- NOTES: Main entry of this program. This program wait for the TCP connection of clients.
+--  After the connection established, it receives messages from clients and broadcst the mssages to the other clients.
+-- Thus, the clients can exchange messages and chat via this program.
 ----------------------------------------------------------------------------------------------------------------------*/
 #include "server.h"
 
