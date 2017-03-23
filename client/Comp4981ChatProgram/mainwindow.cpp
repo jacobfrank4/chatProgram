@@ -7,9 +7,9 @@
 --
 -- DATE: March 15, 2017
 --
--- DESIGNER: Jocob Frank
+-- DESIGNER: Jacob Frank
 --
--- PROGRAMMER: Jocob Frank
+-- PROGRAMMER: Jacob Frank
 --
 -- INTERFACE: MainWindow::MainWindow(QWidget *parent)
 --
@@ -33,9 +33,9 @@ MainWindow::MainWindow(QWidget *parent) :
 --
 -- DATE: March 15, 2017
 --
--- DESIGNER: Jocob Frank
+-- DESIGNER: Jacob Frank
 --
--- PROGRAMMER: Jocob Frank
+-- PROGRAMMER: Jacob Frank
 --
 -- INTERFACE: MainWindow::~MainWindow()
 --
@@ -57,9 +57,9 @@ MainWindow::~MainWindow()
 --      JF: March 18, 2017: Added connection response to inform user that connection to server was established
 --      TK: March 17, 2017: Added the connection to server with the ip and port from the text field
 --
--- DESIGNER: Terry Kang, Jocob Frank
+-- DESIGNER: Terry Kang, Jacob Frank
 --
--- PROGRAMMER: Terry Kang, Jocob Frank
+-- PROGRAMMER: Terry Kang, Jacob Frank
 --
 -- INTERFACE: void on_connectButton_clicked()
 --
@@ -137,9 +137,9 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
 --
 -- DATE: March 18, 2017
 --
--- DESIGNER: Terry Kang, Jocob Frank
+-- DESIGNER: Terry Kang, Jacob Frank
 --
--- PROGRAMMER: Terry Kang, Jocob Frank
+-- PROGRAMMER: Terry Kang, Jacob Frank
 --
 -- INTERFACE: void receiveThread()
 --
@@ -170,9 +170,9 @@ void MainWindow::receiveThread() {
 --          message to prevent vertical gaps between messages
 --      TK: march 18, 2017:Added a feature to read a message from the text field and send it to server
 --
--- DESIGNER: Terry Kang, Jocob Frank
+-- DESIGNER: Terry Kang, Jacob Frank
 --
--- PROGRAMMER: Terry Kang, Jocob Frank
+-- PROGRAMMER: Terry Kang, Jacob Frank
 --
 -- INTERFACE: void on_sendButton_clicked()
 --
@@ -205,9 +205,9 @@ void MainWindow::on_sendButton_clicked()
 -- REVISIONS:
 --      JF: March 21, 2017: Added functionality so scrollbar focus is always at bottom
 --
--- DESIGNER: Terry Kang, Jocob Frank
+-- DESIGNER: Terry Kang, Jacob Frank
 --
--- PROGRAMMER: Terry Kang, Jocob Frank
+-- PROGRAMMER: Terry Kang, Jacob Frank
 --
 -- INTERFACE: void MainWindow::updateChatBox(QString message)
 --                  QString message: Text data to be written to the chat area of the GUI
