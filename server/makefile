@@ -13,11 +13,8 @@ CC_DONE = cleanobjects
 ##################################################
 all: $(EXECUTABLES) $(CC_DONE)
 
-server: $(SERVEROBJECTS)
+chat_server: $(SERVEROBJECTS)
 	$(CC_LOAD) $(CFLAGS) $(SERVEROBJECTS) -o $@
-
-client: $(CLIENTOBJECTS)
-	$(CC_LOAD) $(CFLAGS) $(CLIENTOBJECTS) -o $@ 
 
 server.o:
 	$(CC) -c server.cpp 
